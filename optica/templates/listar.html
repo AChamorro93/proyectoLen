@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script>
+        const botonEliminar = (id) =>{
+            if(window.confirm("Desea Borrar Producto?")){
+                window.location.href="/eliminar_producto/"+id;
+            }
+        }
+        const botonCerrarSesion = () => {
+            if(window.confirm("¿Está Seguro De Querer Cerrar La Sesión?")){
+                window.location.href = "/logout";
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Establece el tamaño mínimo de la vista de altura */
+        }
+
+        .navbar {
+            background-color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .navbar-brand img {
+            max-height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-toggler {
+            border-color: #ffffff;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #ffffff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        /* Contenido de la página */
+        .page-content {
+            flex: 1; /* Ocupa el espacio restante en la dirección vertical */
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 10px;
+            background-color: #007bff;
+            text-align: center;
+            color: #ffffff;
+            margin-top: auto; /* Empuja el footer hacia la parte inferior de la vista */
+        }
+    </style>
+</head>
+
+<body >
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="currentColor" class="bi bi-sunglasses" viewBox="0 0 16 16">
+                    <path d="M3 5a2 2 0 0 0-2 2v.5H.5a.5.5 0 0 0 0 1H1V9a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3 1 1 0 1 1 2 0 3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-.5h.5a.5.5 0 0 0 0-1H15V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-1.888 1.338A2 2 0 0 0 8 6a2 2 0 0 0-1.112.338A2 2 0 0 0 5 5zm0 1h.941c.264 0 .348.356.112.474l-.457.228a2 2 0 0 0-.894.894l-.228.457C2.356 8.289 2 8.205 2 7.94V7a1 1 0 0 1 1-1"/>
+                </svg>
+            </a>
+            <span style="font-weight: bold; color: rgb(34, 34, 233);font-size: 24px;">O</span><span style="font-weight: bold; color: rgb(13, 186, 255);font-size: 24px;">ptica</span><span style="font-weight: bold; color: rgb(34, 34, 233);font-size: 24px;">Med</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 10px;">
+                <ul class="navbar-nav">
+                    <li class="nav-item" style="padding-left: 50px;">
+                        <a class="nav-link" href="/formulario">Formulario</a>
+                    </li>
+                    <li class="nav-item" style="padding-left: 80px;">
+                        <a class="nav-link" href="/listar">Listar</a>
+                    </li>
+                    <li class="nav-item" style="padding-left: 80px;">
+                        <span class="navbar-brand text-white">Bienvenid@</span><span class="navbar-brand text-white">
+                            {{ nomUsuario }}
+                        </span>                    
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a class="nav-link text-center text-white" href="#" onClick="botonCerrarSesion()">Cerrar Sesión</a>
+
+    </nav>
+<div class="container page-content" style=" margin-left: 15px;">
+
+    <div style="float: left; width: 25%; margin-top: 30px; padding-top: 10px;">
+        <aside class="container">
+            <form method="get" action="{% url 'listar' %}">
+                <input type="search" name="buscar" placeholder="Lentes" value="{{ query|default:'' }}" class="form-control mb-3">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+
+        
+                <div class="mb-3">
+                    <label class="fw-bold">Fotocromática:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="fotocromatica" value="si" id="fotocromatica-si">
+                        <label class="form-check-label" for="fotocromatica-si"> Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="fotocromatica" value="no" id="fotocromatica-no">
+                        <label class="form-check-label" for="fotocromatica-no"> No</label>
+                    </div>
+                </div>
+        
+                <div class="mb-3">
+                    <label class="fw-bold">Antireflejo:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="antireflejo" value="si" id="antireflejo-si">
+                        <label class="form-check-label" for="antireflejo-si"> Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="antireflejo" value="no" id="antireflejo-no">
+                        <label class="form-check-label" for="antireflejo-no"> No</label>
+                    </div>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="fw-bold">Filtro Azul:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="filtro_azul" value="si" id="filtro_azul-si">
+                        <label class="form-check-label" for="filtro_azul-si"> Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="filtro_azul" value="no" id="filtro_azul-no">
+                        <label class="form-check-label" for="filtro_azul-no"> No</label>
+                    </div>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="fw-bold">Polarizado:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="polarizado" value="si" id="polarizado-si">
+                        <label class="form-check-label" for="polarizado-si"> Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="polarizado" value="no" id="polarizado-no">
+                        <label class="form-check-label" for="polarizado-no"> No</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Material: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="material" value="policarbonato" id="policarbonato">
+                        <label class="form-check-label" for="policarbonato">Policarbonato</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="material" value="mineral" id="mineral">
+                        <label class="form-check-label" for="mineral">Mineral</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="material" value="organico" id="organico">
+                        <label class="form-check-label" for="organico">Orgánico</label>
+                    </div>
+
+                </div>
+        
+        
+                <button type="button" class="btn btn-primary" onclick="filtrar()">Filtrar</button>
+                <a href="{% url 'listar' %}" class="btn btn-info">Mostrar Todos</a>
+            </form>
+        </aside>
+    </div>
+
+    
+    <script>
+        function filtrar() {
+            document.forms[0].submit(); 
+        }
+    </script>
+    
+
+    
+
+    <div style="float: right; width: 75%;">
+
+        <div class="container page-content">
+            <h2>Listado de Productos</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Laboratorio</th>
+                        <th>Producto</th>
+                        <th>Codigo</th>
+                        <th>Indice</th>
+                        <th>Precio</th>
+                        <th>Antireflejo</th>
+                        <th>Filtro Azul</th>
+                        <th>Fotocromática</th>
+                        <th>Polarizado</th>
+                        <th>Esfera</th>
+                        <th>Cilindro</th>
+                        <th>Material</th>
+                        <th>Eliminar</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if producto %}
+                        {% for x in producto %}
+                            <tr>
+                                <td>{{ x.id }}</td>
+                                <td>{{ x.laboratorio }}</td>
+                                <td>{{ x.producto }}</td>
+                                <td>{{ x.codigo }}</td>
+                                <td>{{ x.indice }}</td>
+                                <td>{{ x.precio }}</td>
+                                <td>{{ x.antireflejo }}</td>
+                                <td>{{ x.filtro_azul }}</td>
+                                <td>{{ x.fotocromatica }}</td>
+                                <td>{{ x.polarizado }}</td>
+                                <td>{{ x.esfera }}</td>
+                                <td>{{ x.cilindro }}</td>
+                                <td>{{ x.material }}</td>
+                                <td>
+                                    <button type="button" onClick="botonEliminar({{ x.id }})" class="btn btn-danger">
+                                        <i class="bi bi-trash-fill"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+                                            <path d="M14 3a.7.7 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.7.7 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2M3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5s-3.69-.311-4.785-.793"/>
+                                        </svg></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="13">No hay productos disponibles.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+    
+
+    <footer>
+        ACHO 2024
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512"/>
+        </svg>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>

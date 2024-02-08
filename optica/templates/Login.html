@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .navbar-brand img {
+            max-height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-toggler {
+            border-color: #ffffff;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #ffffff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        .page-content {
+            flex: 1; 
+            margin-top: 20px;
+        }
+
+        footer {
+            padding: 10px;
+            background-color: #007bff;
+            text-align: center;
+            color: #ffffff;
+            margin-top: auto; 
+        }
+    .login-container {
+        background-color: #EBEDEF;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 400px;
+    }
+
+    .login-container h1 {
+        color: #1976D2;
+    }
+
+    .login-container input {
+        margin-bottom: 10px;
+    }
+
+    .login-container button {
+        background-color: #1976D2;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body >
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="currentColor" class="bi bi-sunglasses" viewBox="0 0 16 16">
+                    <path d="M3 5a2 2 0 0 0-2 2v.5H.5a.5.5 0 0 0 0 1H1V9a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3 1 1 0 1 1 2 0 3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-.5h.5a.5.5 0 0 0 0-1H15V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-1.888 1.338A2 2 0 0 0 8 6a2 2 0 0 0-1.112.338A2 2 0 0 0 5 5zm0 1h.941c.264 0 .348.356.112.474l-.457.228a2 2 0 0 0-.894.894l-.228.457C2.356 8.289 2 8.205 2 7.94V7a1 1 0 0 1 1-1"/>
+                </svg>
+            </a>
+            <span style="font-weight: bold; color: rgb(34, 34, 233);font-size: 24px;">O</span><span style="font-weight: bold; color: rgb(13, 186, 255);font-size: 24px;">ptica</span><span style="font-weight: bold; color: rgb(34, 34, 233);font-size: 24px;">Med</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 10px;">
+                <ul class="navbar-nav">
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center login-container">
+        <h1>Inicio de Sesión</h1>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input class="form-control form-control-lg text-center mb-2" type="text" placeholder="Nombre de Usuario" name="txtusu" required/>
+            <input class="form-control form-control-lg text-center mb-2" type="password" placeholder="Contraseña" name="txtpas" required/>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Login</button>
+        </form>
+
+        {% if r2 %}
+            <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                <h5>{{ r2 }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    </div>
+
+
+
+    
+
+    <footer>
+        ACHO 2024
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512"/>
+        </svg>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>

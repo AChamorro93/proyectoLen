@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .navbar {
+        background-color: #007bff; /* Color de fondo de la barra de navegación */
+    }
+
+    .navbar-brand {
+        color: #ffffff; /* Color del texto del logo */
+        font-weight: bold;
+    }
+
+    .navbar-brand img {
+        max-height: 40px; /* Altura máxima del logo */
+        margin-right: 10px; /* Espaciado a la derecha del logo */
+    }
+
+    .navbar-toggler {
+        border-color: #ffffff; /* Color del borde del botón de alternar */
+    }
+
+    .navbar-toggler-icon {
+        background-color: #ffffff; /* Color del icono del botón de alternar */
+    }
+
+    .navbar-nav .nav-link {
+        color: #ffffff; /* Color del texto de los enlaces en la barra de navegación */
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #f8f9fa; /* Color del texto de los enlaces al pasar el mouse */
+    }
+
+    .formulario p {
+        font-weight: bolder;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+
+        .formulario {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px; 
+            width: 100%;
+            margin: 0 auto; 
+        }
+
+        h4 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .boton {
+            text-align: center;
+            width: 180px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background-color: #0056b3;
+        }
+
+    
+
+</style>
+{% if r %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h5>{{ r }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="currentColor" class="bi bi-sunglasses" viewBox="0 0 16 16">
+              <path d="M3 5a2 2 0 0 0-2 2v.5H.5a.5.5 0 0 0 0 1H1V9a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3 1 1 0 1 1 2 0 3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-.5h.5a.5.5 0 0 0 0-1H15V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-1.888 1.338A2 2 0 0 0 8 6a2 2 0 0 0-1.112.338A2 2 0 0 0 5 5zm0 1h.941c.264 0 .348.356.112.474l-.457.228a2 2 0 0 0-.894.894l-.228.457C2.356 8.289 2 8.205 2 7.94V7a1 1 0 0 1 1-1"/>
+            </svg>
+
+          </a>
+          <span style="font-weight: bold; color: rgb(34, 34, 233);font-size: 24px;">O</span><span style="font-weight: bold; color: rgb(13, 186, 255);font-size: 24px;">ptica</span><span style="font-weight: bold; color: rgb(34, 34, 233);font-size: 24px;">Med</span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 10px;">
+            <ul class="navbar-nav">
+              <li class="nav-item" style="padding-left: 50px;">
+                <a class="nav-link" href="#features">Formulario</a>
+              </li>
+              <li class="nav-item" style="padding-left: 80px;">
+                <a class="nav-link" href="/listar">Listar</a>
+              </li>
+              <li class="nav-item" style="padding-left: 80px;">
+                <span class="navbar-brand text-white">Bienvenid@</span><span class="navbar-brand text-white">
+                    {{ nomUsuario }}
+                </span>                    
+            </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <main>
+        <div class="formulario container-md">
+            <form action="{% url 'formulario' %}" method="post">
+                {% csrf_token %}
+                <h4>Formulario de Registro</h4>
+    
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="laboratorio">Laboratorio:</label>
+                        <input type="text" name="laboratorio" class="form-control" placeholder="Laboratorio" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="producto">Producto:</label>
+                        <input type="text" name="producto" class="form-control" placeholder="Producto" required>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="codigo">Código:</label>
+                        <input type="number" name="codigo" class="form-control" placeholder="Codigo" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="indice">Índice:</label>
+                        <input type="text" name="indice" class="form-control" placeholder="Índice" required>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="precio">Precio:</label>
+                        <input type="number" name="precio" class="form-control" placeholder="Precio" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="antireflejo">Antireflejo:</label>
+                        <select name="antireflejo" class="form-control" required>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="filtro_azul">Filtro Azul:</label>
+                        <select name="filtro_azul" class="form-control" required>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fotocromatica">Fotocromática:</label>
+                        <select name="fotocromatica" class="form-control" required>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="polarizado">Polarizado:</label>
+                        <select name="polarizado" class="form-control" required>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="esfera">Esfera:</label>
+                        <input type="text" name="esfera" class="form-control" placeholder="Esfera" required>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="cilindro">Cilindro:</label>
+                        <input type="text" name="cilindro" class="form-control" placeholder="Cilindro" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="material">Material:</label>
+                        <select name="material" class="form-control">
+                            <option value="Policarbonato">Policarbonato</option>
+                            <option value="Mineral">Mineral</option>
+                            <option value="Organico">Orgánico</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="form-group text-center"> <!-- Agregamos la clase 'text-center' para centrar el contenido -->
+                    <button class="boton" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                        </svg>
+                        Enviar
+                    </button>
+                </div>
+                
+            </form>
+        </div>
+    </main>
+    
+  <footer>
+      <p style="background-color: #007bff;margin: 0%;padding: 10px;text-align: center; color: #ffffff;">ACHO 2024<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+        <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512"/>
+      </svg></p>
+  </footer>  
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
