@@ -28,7 +28,9 @@
         .navbar {
             background-color: #007bff;
             margin-bottom: 20px;
-        }
+            width: 110%; /* Ancho del navbar al 100% */
+            padding: 0; /* Eliminar el relleno para que no haya espacio adicional */
+}
 
         .navbar-brand {
             color: #ffffff;
@@ -64,6 +66,7 @@
 
         /* Footer */
         footer {
+            width: 110%;
             padding: 10px;
             background-color: #007bff;
             text-align: center;
@@ -87,18 +90,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 10px;">
                 <ul class="navbar-nav">
-                    <li class="nav-item" style="padding-left: 50px;">
+                    <li class="nav-item" style="padding-left: 50px; font-weight: bold;">
                         <a class="nav-link" href="/formulario">Formulario</a>
                     </li>
-                    <li class="nav-item" style="padding-left: 80px;">
+                    <li class="nav-item" style="padding-left: 80px; font-weight: bold;">
                         <a class="nav-link" href="/listar">Listar</a>
                     </li>
-                    <li class="nav-item" style="padding-left: 80px;">
-                        <span class="navbar-brand text-white">Bienvenid@</span><span class="navbar-brand text-white">
-                            {{ nomUsuario }}
-                        </span>                    
-                    </li>
                 </ul>
+                <li class="nav-item" style="padding-left: 450px;">
+                    <span class="navbar-brand text-white">Bienvenid@:</span><span class="navbar-brand text-white">
+                        {{ nomUsuario }}
+                    </span>                    
+                </li>
             </div>
         </div>
         <a class="nav-link text-center text-white" href="#" onClick="botonCerrarSesion()">Cerrar Sesión</a>
@@ -214,6 +217,8 @@
                         <th>Esfera</th>
                         <th>Cilindro</th>
                         <th>Material</th>
+                        <th>Cristal</th>
+
                         <th>Eliminar</th>
 
                     </tr>
@@ -235,6 +240,8 @@
                                 <td>{{ x.esfera }}</td>
                                 <td>{{ x.cilindro }}</td>
                                 <td>{{ x.material }}</td>
+                                <td>{{ x.cristal }}</td>
+
                                 <td>
                                     <button type="button" onClick="botonEliminar({{ x.id }})" class="btn btn-danger">
                                         <i class="bi bi-trash-fill"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">

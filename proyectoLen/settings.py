@@ -79,7 +79,7 @@ pymysql.install_as_MySQLdb
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bada_lente',
+        'NAME': 'bada_lentes',
         'USER' : 'root',
         'PASSWORD': ''
     }

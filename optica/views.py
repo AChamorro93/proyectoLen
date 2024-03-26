@@ -61,6 +61,8 @@ def formulario(request):
         esfera = float(request.POST['esfera'])
         cilindro = float(request.POST['cilindro'])
         material = request.POST['material']
+        cristal = request.POST['cristal']
+
 
         lentes = Lentes(
             laboratorio=laboratorio,
@@ -75,6 +77,7 @@ def formulario(request):
             esfera=esfera,
             cilindro=cilindro,
             material=material,
+            cristal=cristal,
         )
         lentes.save()
 
@@ -90,9 +93,9 @@ def formulario(request):
 def mostrarListar(request):
     query = request.GET.get('buscar', '')
     if query:
-        lentes = Lentes.objects.filter(producto__icontains=query).values().order_by("producto")
+        lentes = Lentes.objects.filter(producto__icontains=query).values().order_by("id")
     else:
-        lentes = Lentes.objects.all().order_by("producto")
+        lentes = Lentes.objects.all().order_by("id")
 
     antireflejo = request.GET.getlist('antireflejo')
     filtro_azul = request.GET.getlist('filtro_azul')

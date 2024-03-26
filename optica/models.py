@@ -23,6 +23,7 @@ class Lentes(models.Model):
         ('Mineral', 'Mineral'),
         ('Organico', 'Orgánico'),
     ])
+    cristal = models.TextField(max_length=100, null= True)
 
     def __str__(self):
         return str(self.codigo)
